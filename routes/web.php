@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,27 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Route::get('/detail', function () {
   return view('detail');
 });
 
-// Route::get('home/{post}', function ($slug) {
-//   $path = __DIR__."/../resources/posts/{$slug}.html";
+// All posts
+Route::get('/', function () {
+    return view('home', [
+      'posts' => Post::all()
+    ]);
+});
 
-//   if (! file_exists($path)) {
-
-//       //ddd('file does not exist');
-//       return redirect('/');
-//       //abort(404);
-//   }
-
-//   $post = file_get_contents($path);
-
-//   return view('post', [
-//       'post' => $post 
-//   ]);
-// })->where('post','[A-z_\-]+');//regular expression
+// Single post
+Route::get('posts/{id}', function($id){
+  return view('post', [
+    'post' => Post::find($id)
+  ]);
+});
