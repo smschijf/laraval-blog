@@ -1,14 +1,24 @@
-@unless(count($posts) == 0)
+@extends ('components.layout')
 
-@foreach($posts as $post)
-<h2>
-  <a href="/posts/{{$post['id']}}">{{$post['title']}}</a>
-</h2>
-<p>
-  {{$post['description']}}
-</p>
-@endforeach
+@section('pageTitle')
+homepage
+@endsection
 
-@else
-<p>No posts found</p>
-@endunless
+@section('content')
+hallo
+@endsection
+
+<body>
+  @foreach ($posts as $post)
+  <article>
+    <h1>
+      <a href="/posts/<?= $post->slug; ?>">
+        <?= $post->title ?>
+      </a>
+    </h1>
+    <div>
+      <?= $post->excerpt ?>
+    </div>
+  </article>
+  @endforeach
+</body>

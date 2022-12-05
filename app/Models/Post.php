@@ -2,33 +2,45 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Illuminate\Support\Facades\File;
+
 class Post
 {
-  public static function all()
+  public $title;
+  public $excerpt;
+  public $date;
+  public $body;
+  public $slug;
+
+  public function __construct($title, $excerpt, $date, $body, $slug)
   {
-    return [
-      [
-        'id' => 1,
-        'title' => 'Post One',
-        'date' => '28 November, 2022, 14:36',
-        'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti pariatur reiciendis saepe, obcaecati ipsa tempora quae, officia maxime harum quam explicabo non sequi iste, dolorum provident sit sint nemo? Eligendi.'
-      ],
-      [
-        'id' => 2,
-        'title' => 'Post Two',
-        'date' => '28 November, 2022, 14:36',
-        'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti pariatur reiciendis saepe, obcaecati ipsa tempora quae, officia maxime harum quam explicabo non sequi iste, dolorum provident sit sint nemo? Eligendi.'
-      ]
-    ];
+    $this->title = $title;
+    $this->excerpt = $excerpt;
+    $this->date = $date;
+    $this->body = $body;
+    $this->slug = $slug;
   }
 
-  public static function find($id) {
-    $posts = self::all();
+  public static function all()
+  {
+    return collect(File::files(resource_path("posts")))
+    ->map(function ($file) {
+      $document = YamlFrontMatter::parseFile($file);
 
-    foreach($posts as $post) {
-      if($post['id'] == $id) {
-        return $post;
-      }
-    }
+      return new Post(
+        $document->title,
+        $document->excerpt,
+        $document->date,
+        $document->body(),
+        $document->slug
+      );
+    });
+  }
+
+  public static function find($slug)
+  {
+    return static::all()->firstWhere('slug', $slug);
   }
 }
