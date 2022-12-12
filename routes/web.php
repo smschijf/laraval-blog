@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Models\Post;
 
 /*
@@ -16,15 +16,16 @@ use App\Models\Post;
 */
 
 // All posts
-Route::get('/', function () {
-  return view('home', [
-    'posts' => Post::all()
-  ]);
-});
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 // Single post
-Route::get('posts/{post:slug}', function (Post $post) {
-  return view('post', [
-    'post' => $post
-  ]);
-});
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
+
+// Admin create post
+Route::get('admin/posts/create', [PostController::class, 'create']);
+Route::post('admin/posts', [PostController::class, 'store']);
+
+
+
+
+// mysql.server start
