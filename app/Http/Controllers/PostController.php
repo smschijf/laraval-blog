@@ -11,6 +11,7 @@ class PostController extends Controller
     public function index() {
       return view('components.home', [
         'posts' => Post::all()
+        ->sortByDesc('updated_at')
       ]);
     }
 
