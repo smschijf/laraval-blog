@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -26,6 +27,7 @@ Route::get('admin/posts/create', [PostController::class, 'create']);
 Route::post('admin/posts', [PostController::class, 'store']);
 
 
-
-
+// register users and admin
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 // mysql.server start
