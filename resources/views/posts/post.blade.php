@@ -5,25 +5,6 @@
 @endsection
 
 @section('content')
-
-<body style="font-family: Open Sans, sans-serif">
-  <section class="px-6 py-8">
-      <nav class="md:flex md:justify-between md:items-center">
-          <div>
-              <a href="/">
-                  <img src="/assets/img/logo.svg" alt="Laracasts Logo" width="165" height="16">
-              </a>
-          </div>
-
-          <div class="mt-8 md:mt-0">
-              <a href="/" class="text-xs font-bold uppercase">Home Page</a>
-
-              <a href="#"
-                  class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">Subscribe
-                  for Updates</a>
-          </div>
-      </nav>
-
       <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
           <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
               <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
@@ -105,6 +86,4 @@
               </div>
           </div>
       </footer>
-  </section>
-</body>
 @endsection

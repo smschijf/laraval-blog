@@ -1,4 +1,4 @@
-@extends ('components.layout')
+@extends ('admin.layout')
 
 @section ('title')
 <title>Create Post</title>
@@ -6,7 +6,7 @@
 
 @section ('content')
 <section class="px-6 py-8 border border-gray-200 p-6 rounded-xl max-w-sm mx-auto">
-  <form action="/admin/posts" method="post">
+  <form action="/admin/posts/create" method="post">
     @csrf
     <div class="mb-6">
       <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="title">Title</label>

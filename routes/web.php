@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -21,9 +22,15 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 // Single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
+// Admin page
+Route::get('admin', [AdminController::class, 'index']);
+
+// Admin view posts
+Route::get('admin/posts', [AdminController::class, 'posts']);
+
 // Admin create post
-Route::get('admin/posts/create', [PostController::class, 'create']);
-Route::post('admin/posts', [PostController::class, 'store']);
+Route::get('admin/posts/create', [AdminController::class, 'create']);
+Route::post('admin/posts/create', [AdminController::class, 'store']);
 
 
 
