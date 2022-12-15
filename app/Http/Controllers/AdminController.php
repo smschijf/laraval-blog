@@ -52,16 +52,16 @@ class AdminController extends Controller
         return back()->with('succes', 'Post Deleted!');
     }
 
-    public function editPage()
+    public function editSettings()
     {
-        return view('admin.edit');
+        return view('admin.settings');
     }
 
-    public static function update()
+    public static function updateSettings()
     {
         $title = request('title');
         DB::table('page_info')->where('id', 1)->update(['title' => $title]);
-        return redirect('/admin/edit');
+        return redirect('/admin/settings');
     }
 
     public static function returnTitle()

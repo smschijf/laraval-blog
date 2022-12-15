@@ -22,10 +22,10 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 // Single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('admin', [AdminController::class, 'index'])->name('admin');
+Route::get('admin', [AdminController::class, 'index']);
 
-Route::get('admin/settings', [AdminController::class, 'editSettings'])->name('admin.settings');
-Route::post('admin/update', 'App\Http\Controllers\AdminController@update')->name('admin.update');
+Route::get('admin/settings', [AdminController::class, 'editSettings']);
+Route::post('admin/update', 'App\Http\Controllers\AdminController@updateSettings');
 
 Route::get('admin/posts', [AdminController::class, 'posts']);
 Route::get('admin/posts/create', [AdminController::class, 'create']);
