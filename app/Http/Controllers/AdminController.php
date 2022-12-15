@@ -60,7 +60,7 @@ class AdminController extends Controller
     public static function updateSettings()
     {
         $title = request('title');
-        if ($title != null) {            
+        if ($title != null) {
             DB::table('page_info')->where('id', 1)->update(['title' => $title]);
         }
         return redirect('/admin/settings');
