@@ -25,10 +25,10 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 
 //Admin
-Route::get('admin', [AdminController::class, 'index']);
+Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
 
-Route::get('admin/settings', [AdminController::class, 'editSettings']);
-Route::post('admin/update', 'App\Http\Controllers\AdminController@updateSettings');
+Route::get('admin/settings', [AdminController::class, 'editSettings'])->middleware('admin');
+Route::post('admin/update', 'App\Http\Controllers\AdminController@updateSettings')->middleware('admin');
 
 Route::get('admin/posts', [AdminController::class, 'posts'])->middleware('admin');
 Route::get('admin/posts/create', [AdminController::class, 'create'])->middleware('admin');
