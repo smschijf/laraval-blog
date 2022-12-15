@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminCheck;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,25 +22,16 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 // Single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-// Admin page
-Route::get('admin', [AdminController::class, 'index']);
+Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
-// Admin view posts
+Route::get('admin/settings', [AdminController::class, 'editSettings'])->name('admin.settings');
+Route::post('admin/update', 'App\Http\Controllers\AdminController@update')->name('admin.update');
+
 Route::get('admin/posts', [AdminController::class, 'posts']);
-
-// Admin create post
 Route::get('admin/posts/create', [AdminController::class, 'create']);
 Route::post('admin/posts/create', [AdminController::class, 'store']);
-
-// Admin edit post
-
 Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
-
-// Admin delete post
-
 Route::delete('admin/posts/{post}', [AdminController::class, 'destroy']);
 
 
-
-
-// mysql.server start
+// ->middleware('admin');

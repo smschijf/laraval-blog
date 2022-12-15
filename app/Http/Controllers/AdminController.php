@@ -2,53 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Validation\Rule;
-
-use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-  public function index()
-  {
-    return view('admin.home');
-  }
+    public function index()
+    {
+        return view('admin.home');
+    }
 
-  public function posts()
-  {
-    return view('admin.posts', [
-      'posts' => Post::all()
-        ->sortByDesc('updated_at')
-    ]);
-  }
+    public function posts()
+    {
+        return view('admin.posts', [
+            'posts' => Post::all()
+                ->sortByDesc('updated_at')
+        ]);
+    }
 
-  public function create()
-  {
-    return view('admin.create');
-  }
+    public function create()
+    {
+        return view('admin.create');
+    }
 
-  public function store()
-  {
-    $attributes = request()->validate([
-      'title' => 'required',
-      'slug' => ['required', Rule::unique('posts', 'slug')],
-      'excerpt' => 'required',
-      'body' => 'required',
-    ]);
+    public function store()
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'body' => 'required',
+        ]);
 
-    Post::create($attributes);
+        Post::create($attributes);
 
-    return redirect('/');
-  }
+        return redirect('/');
+    }
 
-  public function edit()
-  {
-    return view('admin.edit-post');
-  }
+    public function edit()
+    {
+        return view('admin.edit-post');
+    }
 
-  public function destroy(Post $post) {
-    $post->delete();
+    public function destroy(Post $post)
+    {
+        $post->delete();
 
-    return back()->with('succes', 'Post Deleted!');
-  }
+        return back()->with('succes', 'Post Deleted!');
+    }
+
+    public function editPage()
+    {
+        return view('admin.edit');
+    }
+
+    public static function update()
+    {
+        $title = request('title');
+        DB::table('page_info')->where('id', 1)->update(['title' => $title]);
+        return redirect('/admin/edit');
+    }
+
+    public static function returnTitle()
+    {
+        return DB::table('page_info')->where('id', 1)->value('title');
+    }
 }

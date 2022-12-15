@@ -1,7 +1,11 @@
 @extends ('components.layout')
 
+@php
+$title = App\Http\Controllers\AdminController::returnTitle();
+@endphp
+
 @section('title')
-<title>My Blog</title>
+    <title>{{ $title }}</title>
 @endsection
 
 @section('content')
