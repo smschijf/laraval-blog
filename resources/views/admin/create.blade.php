@@ -1,7 +1,7 @@
 @extends ('admin.layout')
 
-@section ('title')
-<title>Create Post</title>
+@section('title')
+    <title>Create Post</title>
 @endsection
 
 @section ('content')
