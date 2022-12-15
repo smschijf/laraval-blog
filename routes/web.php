@@ -32,6 +32,9 @@ Route::get('admin/posts', [AdminController::class, 'posts']);
 Route::get('admin/posts/create', [AdminController::class, 'create']);
 Route::post('admin/posts/create', [AdminController::class, 'store']);
 
+// Admin edit post
+
+Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
 
 
 

@@ -19,10 +19,13 @@
                 Title
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                Excerpt
+                Updated At
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                Updated At
+                Edit
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                Delete
               </th>
             </tr>
           </thead class="border-b">
@@ -31,13 +34,23 @@
             <tr class="bg-white border-b">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $post->id }}</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <a href="/posts/{{ $post->slug }}">
                 {{ $post->title }}
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                {{ $post->excerpt }}
+                </a>
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 {{ $post->updated_at }}
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <a href="posts/{{ $post->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <form action="posts/{{ $post->id }}" method="post">
+                  @csrf
+                  @method('DELETE')
+
+                  <button class="text-xs text-gray-400">Delete</button>
+                </form>
               </td>
             </tr class="bg-white border-b">
             @endforeach

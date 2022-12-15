@@ -13,6 +13,7 @@ class AdminController extends Controller
   {
     return view('admin.home');
   }
+
   public function posts()
   {
     return view('admin.posts', [
@@ -20,6 +21,7 @@ class AdminController extends Controller
         ->sortByDesc('updated_at')
     ]);
   }
+
   public function create()
   {
     return view('admin.create');
@@ -37,5 +39,10 @@ class AdminController extends Controller
     Post::create($attributes);
 
     return redirect('/');
+  }
+
+  public function edit()
+  {
+    return view('admin.edit-post');
   }
 }

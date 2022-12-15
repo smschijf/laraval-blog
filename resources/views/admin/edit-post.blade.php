@@ -4,6 +4,6 @@
 <title>Admin Page</title>
 @endsection
 
-@section('content')
-dashboard
+@section ('content')
+  edit post
 @endsection
