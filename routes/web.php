@@ -36,6 +36,11 @@ Route::post('admin/posts/create', [AdminController::class, 'store']);
 
 Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
 
+// Admin delete post
+
+Route::delete('admin/posts/{post}', [AdminController::class, 'destroy']);
+
+
 
 
 // mysql.server start

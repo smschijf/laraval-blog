@@ -45,4 +45,10 @@ class AdminController extends Controller
   {
     return view('admin.edit-post');
   }
+
+  public function destroy(Post $post) {
+    $post->delete();
+
+    return back()->with('succes', 'Post Deleted!');
+  }
 }
