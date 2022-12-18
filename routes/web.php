@@ -44,3 +44,8 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('sessions ', [SessionController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
+
+
+
+// zoekken
+Route::get('/search', [PostController::class, 'search'])->name('search');
