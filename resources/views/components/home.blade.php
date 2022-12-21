@@ -1,11 +1,13 @@
 @extends ('components.layout')
-{{-- 
-@php
-$title = App\Http\Controllers\AdminController::returnTitle();
-@endphp --}}
+
+<?php
+$singleton = App\Http\Controllers\Settings::getInstance();
+
+$data = $singleton->getData();
+?>
 
 @section('title')
-    <title>laravel</title>
+    <title><?= $data[1]; ?></title>
 @endsection
 
 @section('content')
@@ -16,15 +18,14 @@ $title = App\Http\Controllers\AdminController::returnTitle();
 
             <header class="max-w-xl mx-auto mt-20 text-center">
                 <h1 class="text-4xl">
-                    Latest <span class="text-blue-500">Laravel From Scratch</span> News
+                    <?= $data[2]; ?>
                 </h1>
 
-                <h2 class="inline-flex mt-2">By Lary Laracore <img src="/assets/img/lary-head.svg"
+                <h2 class="inline-flex mt-2"><?= $data[3]; ?> <img src="/assets/img/lary-head.svg"
                         alt="Head of Lary the mascot"></h2>
 
                 <p class="text-sm mt-14">
-                    Another year. Another update. We're refreshing the popular Laravel series with new content.
-                    I'm going to keep you guys up to speed with what's going on!
+                    <?= $data[4]; ?>
                 </p>
 
                 <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
@@ -139,8 +140,8 @@ $title = App\Http\Controllers\AdminController::returnTitle();
 
             <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
                 <img src="/assets/img/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
-                <h5 class="text-3xl">Stay in touch with the latest posts</h5>
-                <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
+                <h5 class="text-3xl"><?= $data[5] ?></h5>
+                <p class="text-sm mt-3"><?= $data[6] ?></p>
 
                 <div class="mt-10">
                     <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">

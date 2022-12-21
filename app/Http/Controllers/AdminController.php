@@ -57,17 +57,11 @@ class AdminController extends Controller
         return view('admin.settings');
     }
 
-    public static function updateSettings()
+    public function updateSettings()
     {
-        $title = request('title');
-        if ($title != null) {
-            DB::table('page_info')->where('id', 1)->update(['title' => $title]);
-        }
-        return redirect('/admin/settings');
-    }
+        $singleton = Settings::getInstance();
+        $singleton->setData();
 
-    public static function returnTitle()
-    {
-        return DB::table('page_info')->where('id', 1)->value('title');
+        return redirect('/admin/settings');
     }
 }
